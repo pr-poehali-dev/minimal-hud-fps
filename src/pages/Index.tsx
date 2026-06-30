@@ -5,7 +5,7 @@ import AmmoCounter from '@/components/hud/AmmoCounter';
 import Crosshair from '@/components/hud/Crosshair';
 import MiniMap from '@/components/hud/MiniMap';
 
-const BG = 'https://cdn.poehali.dev/projects/e3e5237e-be37-40f3-9efd-b6728002faaa/files/8b71597c-a3c3-4db0-abae-dbf169530e9e.jpg';
+const BG = 'https://cdn.poehali.dev/projects/e3e5237e-be37-40f3-9efd-b6728002faaa/files/60dfa927-b23f-4bd0-85f4-307b9b40daad.jpg';
 
 const WEAPONS = [
   { name: 'AK-74M', icon: 'Crosshair', magMax: 30, reserve: 120 },
