@@ -5,20 +5,13 @@ import AmmoCounter from '@/components/hud/AmmoCounter';
 import Crosshair from '@/components/hud/Crosshair';
 import MiniMap from '@/components/hud/MiniMap';
 
-const BG = 'https://cdn.poehali.dev/projects/e3e5237e-be37-40f3-9efd-b6728002faaa/files/cbb011af-cff6-4249-acab-0a9eb8f3eda1.jpg';
+const BG = 'https://cdn.poehali.dev/projects/e3e5237e-be37-40f3-9efd-b6728002faaa/files/8b71597c-a3c3-4db0-abae-dbf169530e9e.jpg';
 
 const WEAPONS = [
   { name: 'AK-74M', icon: 'Crosshair', magMax: 30, reserve: 120 },
   { name: 'SPECTRE-9', icon: 'Zap', magMax: 25, reserve: 100 },
   { name: 'RAILGUN MK-II', icon: 'Flame', magMax: 8, reserve: 32 },
 ];
-
-interface Blip {
-  id: number;
-  angle: number;
-  dist: number;
-  type: 'enemy' | 'ally' | 'objective';
-}
 
 const Index = () => {
   const [health, setHealth] = useState(100);
@@ -31,7 +24,6 @@ const Index = () => {
   const [playerX, setPlayerX] = useState(50);
   const [playerY, setPlayerY] = useState(60);
   const [heading, setHeading] = useState(0);
-  const [blips, setBlips] = useState<Blip[]>([]);
 
   const weapon = WEAPONS[weaponIdx];
 
@@ -94,25 +86,11 @@ const Index = () => {
       }
     }, 2000);
 
-    const radar = setInterval(() => {
-      const count = 2 + Math.floor(Math.random() * 4);
-      const next: Blip[] = Array.from({ length: count }).map((_, i) => ({
-        id: Date.now() + i,
-        angle: Math.random() * 360,
-        dist: 0.3 + Math.random() * 0.65,
-        type: (['enemy', 'enemy', 'ally', 'objective'] as const)[Math.floor(Math.random() * 4)],
-      }));
-      setBlips(next);
-    }, 2500);
-
     return () => {
       clearInterval(movement);
       clearInterval(combat);
-      clearInterval(radar);
     };
   }, []);
-
-  const enemyCount = blips.filter((b) => b.type === 'enemy').length;
 
   return (
     <div
@@ -126,22 +104,12 @@ const Index = () => {
       <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/60" />
       <div className="absolute inset-0 shadow-[inset_0_0_200px_rgba(0,0,0,0.85)]" />
 
-      <div className="absolute top-0 left-0 right-0 flex items-center justify-between px-8 py-3 animate-flicker">
+      <div className="absolute top-0 left-0 right-0 flex items-center px-8 py-3 animate-flicker">
         <div className="flex items-center gap-3 font-mono text-[11px] tracking-[0.2em] text-[hsl(var(--hud-cyan))]/80">
           <Icon name="Activity" size={14} className="text-[hsl(var(--hud-green))]" />
           <span>OPERATIVE: GHOST-01</span>
           <span className="text-[hsl(var(--hud-cyan))]/30">|</span>
           <span>MISSION: BLACKOUT</span>
-        </div>
-        <div className="flex items-center gap-4 font-mono text-[11px] tracking-[0.2em]">
-          <span className="flex items-center gap-1.5 text-[hsl(var(--hud-red))]">
-            <Icon name="Skull" size={14} />
-            {enemyCount} HOSTILES
-          </span>
-          <span className="text-[hsl(var(--hud-cyan))]/80 flex items-center gap-1.5">
-            <Icon name="Clock" size={14} />
-            12:47
-          </span>
         </div>
       </div>
 
