@@ -3,7 +3,6 @@ import Icon from '@/components/ui/icon';
 import HealthBar from '@/components/hud/HealthBar';
 import AmmoCounter from '@/components/hud/AmmoCounter';
 import Crosshair from '@/components/hud/Crosshair';
-import Radar from '@/components/hud/Radar';
 import MiniMap from '@/components/hud/MiniMap';
 
 const BG = 'https://cdn.poehali.dev/projects/e3e5237e-be37-40f3-9efd-b6728002faaa/files/cbb011af-cff6-4249-acab-0a9eb8f3eda1.jpg';
@@ -28,7 +27,6 @@ const Index = () => {
   const [magazine, setMagazine] = useState(30);
   const [reserve, setReserve] = useState(120);
   const [firing, setFiring] = useState(false);
-  const [damage, setDamage] = useState(0);
 
   const [playerX, setPlayerX] = useState(50);
   const [playerY, setPlayerY] = useState(60);
@@ -86,7 +84,6 @@ const Index = () => {
     const combat = setInterval(() => {
       if (Math.random() > 0.6) {
         setHealth((h) => Math.max(0, h - Math.floor(Math.random() * 12)));
-        setDamage((d) => d + 1);
       }
       if (Math.random() > 0.8) {
         setArmor((a) => Math.max(0, a - Math.floor(Math.random() * 8)));
@@ -129,12 +126,6 @@ const Index = () => {
       <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/60" />
       <div className="absolute inset-0 shadow-[inset_0_0_200px_rgba(0,0,0,0.85)]" />
 
-      <div
-        key={damage}
-        className="absolute inset-0 bg-[hsl(var(--hud-red))] pointer-events-none animate-damage-flash"
-        style={{ animationDuration: '0.6s' }}
-      />
-
       <div className="absolute top-0 left-0 right-0 flex items-center justify-between px-8 py-3 animate-flicker">
         <div className="flex items-center gap-3 font-mono text-[11px] tracking-[0.2em] text-[hsl(var(--hud-cyan))]/80">
           <Icon name="Activity" size={14} className="text-[hsl(var(--hud-green))]" />
@@ -161,10 +152,6 @@ const Index = () => {
           <Icon name="X" size={28} className="text-[hsl(var(--hud-red))] opacity-80" />
         </div>
       )}
-
-      <div className="absolute top-14 right-8">
-        <Radar blips={blips} />
-      </div>
 
       <div className="absolute top-14 left-8">
         <MiniMap playerX={playerX} playerY={playerY} heading={heading} />
