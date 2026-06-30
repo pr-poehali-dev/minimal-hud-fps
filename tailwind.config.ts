@@ -18,6 +18,10 @@ export default {
 			}
 		},
 		extend: {
+			fontFamily: {
+				display: ['Rajdhani', 'sans-serif'],
+				mono: ['Share Tech Mono', 'monospace'],
+			},
 			colors: {
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
@@ -70,25 +74,56 @@ export default {
 			},
 			keyframes: {
 				'accordion-down': {
-					from: {
-						height: '0'
-					},
-					to: {
-						height: 'var(--radix-accordion-content-height)'
-					}
+					from: { height: '0' },
+					to: { height: 'var(--radix-accordion-content-height)' }
 				},
 				'accordion-up': {
-					from: {
-						height: 'var(--radix-accordion-content-height)'
-					},
-					to: {
-						height: '0'
-					}
+					from: { height: 'var(--radix-accordion-content-height)' },
+					to: { height: '0' }
+				},
+				'radar-sweep': {
+					from: { transform: 'rotate(0deg)' },
+					to: { transform: 'rotate(360deg)' }
+				},
+				'crosshair-pulse': {
+					'0%, 100%': { opacity: '0.85', transform: 'scale(1)' },
+					'50%': { opacity: '1', transform: 'scale(1.06)' }
+				},
+				'blip-fade': {
+					'0%': { opacity: '0', transform: 'scale(0.3)' },
+					'30%': { opacity: '1', transform: 'scale(1)' },
+					'100%': { opacity: '0', transform: 'scale(0.6)' }
+				},
+				'scan-line': {
+					'0%': { top: '0%' },
+					'100%': { top: '100%' }
+				},
+				'flicker': {
+					'0%, 100%': { opacity: '1' },
+					'92%': { opacity: '1' },
+					'94%': { opacity: '0.4' },
+					'96%': { opacity: '1' }
+				},
+				'damage-flash': {
+					'0%': { opacity: '0' },
+					'10%': { opacity: '0.5' },
+					'100%': { opacity: '0' }
+				},
+				'glow-pulse': {
+					'0%, 100%': { opacity: '0.5' },
+					'50%': { opacity: '1' }
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'radar-sweep': 'radar-sweep 3s linear infinite',
+				'blip-fade': 'blip-fade 3s ease-in-out infinite',
+				'crosshair-pulse': 'crosshair-pulse 2s ease-in-out infinite',
+				'scan-line': 'scan-line 4s linear infinite',
+				'flicker': 'flicker 6s linear infinite',
+				'damage-flash': 'damage-flash 0.6s ease-out',
+				'glow-pulse': 'glow-pulse 2s ease-in-out infinite'
 			}
 		}
 	},
